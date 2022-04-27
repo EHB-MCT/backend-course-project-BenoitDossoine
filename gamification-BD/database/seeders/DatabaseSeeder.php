@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
         $team = new Team();
         $team->name = "Web 2";
         $team->description = "This course is given in semester 1.";
+        $team->docent = "Mike Derycke";
         $team->save();
     }
 }
