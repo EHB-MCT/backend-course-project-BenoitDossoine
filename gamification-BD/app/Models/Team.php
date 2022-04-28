@@ -19,4 +19,9 @@ class Team extends Model
     {
         return $this->hasMany(Quest::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

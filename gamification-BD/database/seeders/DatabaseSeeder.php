@@ -31,6 +31,10 @@ class DatabaseSeeder extends Seeder
         $user->password = Hash::make("docent");
         $user->save();
 
+        $mike = User::find(2);
+        $mike->teams()->attach(1);
+
+
         $team = new Team();
         $team->name = "Web 2";
         $team->description = "This course is given in semester 1.";
