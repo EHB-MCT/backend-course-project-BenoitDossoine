@@ -10,6 +10,7 @@
                     <h2 class="text-lg">{{$team->name}}</h2>
                     <p class="text-sm mt-4">{{$team->description}}</p>
                     <p class="text-sm mt-2">Teached by: {{$team->docent}}</p>
+                    <button><a href="{{route('team',[$team->id])}}">See team</a></button>
                 </div>
             @endforeach
         </div>
