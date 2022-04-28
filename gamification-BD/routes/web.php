@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\QuestController;
+use App\Models\Quest;
 use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -47,4 +49,25 @@ Route::post('/teamcreate', function(Request $request){
 
 })->name('teamcreate');
 
+Route::get('/team/{team_id}',[TeamController::class,"teamData"])->name('team');
+
+Route::get('/team/{team_id}/newquest', [QuestController::class,"newTeamQuest"])->middleware(['auth'])->name('newquest');
+
+Route::post('/questcreate', function(Request $request){
+    $name = $request->input('name');
+    $description = $request->input('description');
+    $experience = $request->input('experience');
+    $teamId = $request->input('teamId');
+//    $module = $request->input('module');
+
+
+    $quest = new Quest();
+    $quest->name=$name;
+    $quest->description=$description;
+    $quest->experience=$experience;
+    $quest->team_id=$teamId;
+    $quest->save();
+
+    return redirect()->route('team',['team_id'=>$teamId]);
+})->name('questcreate');
 require __DIR__.'/auth.php';
