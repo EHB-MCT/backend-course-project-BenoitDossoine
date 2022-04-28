@@ -31,9 +31,6 @@ class DatabaseSeeder extends Seeder
         $user->password = Hash::make("docent");
         $user->save();
 
-        $mike = User::find(2);
-        $mike->teams()->attach(1);
-
 
         $team = new Team();
         $team->name = "Web 2";
@@ -47,6 +44,13 @@ class DatabaseSeeder extends Seeder
         $quest->experience = 8;
         $quest->team_id=1;
         $quest->save();
+
+        $benoit = User::find(1);
+        $benoit->teams()->attach(1);
+        $benoit->teams()->attach(2);
+
+        $mike = User::find(2);
+        $mike->teams()->attach(1);
 
         $teams = Team::factory()->count(3)->create();
     }

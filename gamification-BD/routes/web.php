@@ -45,6 +45,8 @@ Route::post('/teamcreate', function(Request $request){
     $team->docent=$username;
     $team->save();
 
+    $team->users()->attach(auth()->id());
+
     return redirect()->back();
 
 })->name('teamcreate');

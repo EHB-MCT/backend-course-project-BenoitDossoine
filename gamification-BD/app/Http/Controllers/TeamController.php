@@ -1,10 +1,13 @@
 <?php
 namespace App\Http\Controllers;
 use App\Models\Team;
+use Illuminate\Support\Facades\Auth;
+
 class TeamController extends Controller
 {
     public function allTeams(){
-        $teamList= Team::all();
+        $currentUser = Auth::user();
+        $teamList= $currentUser->teams;
         return view('content.teams',["teamlist"=>$teamList]);
     }
 
