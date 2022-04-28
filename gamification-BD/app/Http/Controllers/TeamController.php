@@ -7,4 +7,10 @@ class TeamController extends Controller
         $teamList= Team::all();
         return view('content.teams',["teamlist"=>$teamList]);
     }
+
+    public function teamData($teamId){
+        $team = Team::find($teamId);
+        $quests = $team->quests;
+        return view('content.team',["team"=>$team,"quests"=>$quests]);
+    }
 }
