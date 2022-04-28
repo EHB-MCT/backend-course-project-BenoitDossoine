@@ -14,4 +14,9 @@ class Team extends Model
         'description',
         'docent',
     ];
+
+    public function quests()
+    {
+        return $this->hasMany(Quest::class);
+    }
 }

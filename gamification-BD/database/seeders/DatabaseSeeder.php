@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Quest;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -35,6 +36,13 @@ class DatabaseSeeder extends Seeder
         $team->description = "This course is given in semester 1.";
         $team->docent = "Mike Derycke";
         $team->save();
+
+        $quest = new Quest();
+        $quest->name = "Start web 2";
+        $quest->description = "Let's get started!";
+        $quest->experience = 8;
+        $quest->team_id=1;
+        $quest->save();
 
         $teams = Team::factory()->count(3)->create();
     }

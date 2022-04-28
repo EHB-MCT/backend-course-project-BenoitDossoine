@@ -14,5 +14,11 @@ class Quest extends Model
         'description',
         'experience',
         'module',
+        'team_id',
     ];
+
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
+    }
 }
