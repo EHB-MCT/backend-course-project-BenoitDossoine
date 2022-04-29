@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -17,6 +18,7 @@ class PermissionSeeder extends Seeder
     {
         Permission::create(['name'=>'create teams']);
         Permission::create(['name'=>'change roles']);
+        Permission::create(['name'=>'create quests']);
         Permission::create(['name'=>'add students to teams']);
         Permission::create(['name'=>'verify achievements']);
         Permission::create(['name'=>'edit team']);
@@ -28,10 +30,17 @@ class PermissionSeeder extends Seeder
         $manager = Role::create(['name'=>'manager']);
         $manager->givePermissionTo('create teams');
         $manager->givePermissionTo('add students to teams');
+        $manager->givePermissionTo('create quests');
         $manager->givePermissionTo('verify achievements');
         $manager->givePermissionTo('edit team');
 
         $admin = Role::create(['name'=>'admin']);
+
+        $benoit = User::find(1);
+        $benoit->assignRole($member);
+
+        $mike = User::find(2);
+        $mike->assignRole($manager);
 
     }
 }
