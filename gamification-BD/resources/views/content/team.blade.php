@@ -6,6 +6,9 @@
         @can('create quests')
         <button class="btn btn-blue"><a href="{{route('newquest',[$team->id])}}">Add quest</a></button>
         @endcan
+        @can('add students to teams')
+        <button class="btn btn-blue"><a href="">Add members</a></button>
+        @endcan
         <div class="questContainer grid-cols-3">
             @foreach($quests as $quest)
                 <div class="questTile mt-8 rounded-xl p-6 border-solid border-gray-400 shadow">
