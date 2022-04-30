@@ -2,22 +2,35 @@
 
 @section('content')
     <div class="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <h2 class="text-center uppercase text-5xl">{{$team->name}}</h2>
+        <h2 class="text-center uppercase text-6xl font-extralight">{{$team->name}}</h2>
         @can('create quests')
         <button class="btn btn-blue"><a href="{{route('newquest',[$team->id])}}">Add quest</a></button>
         @endcan
         @can('add students to teams')
         <button class="btn btn-blue"><a href="">Add members</a></button>
         @endcan
-        <div class="questContainer grid-cols-3">
-            @foreach($quests as $quest)
-                <div class="questTile mt-8 rounded-xl p-6 border-solid border-gray-400 shadow">
-                    <h2 class="text-xl mb-4">{{$quest->name}}</h2>
-                    <p>{{$quest->description}}</p>
-                    <p>{{$quest->experience}}</p>
-                    <button class="btn btn-green mt-6">Mark as completed</button>
-                </div>
-            @endforeach
+        <div class="teamContainer grid grid-cols-3 gap-4">
+            <div class="questContainer col-span-2">
+                <p class="text-3xl font-light mb-4">Quests</p>
+                @foreach($team->quests as $quest)
+                    <div class="questTile mb-8 rounded-xl p-6 border-solid border-gray-400 shadow">
+                        <h2 class="text-xl mb-4">{{$quest->name}}</h2>
+                        <p>{{$quest->description}}</p>
+                        <p>{{$quest->experience}}</p>
+                        <button class="btn btn-green mt-6">Mark as completed</button>
+                    </div>
+                @endforeach
+            </div>
+            <div class="membersContainer">
+                <p class="text-3xl font-light mb-4">Members</p>
+                @foreach($team->users as $user)
+                        <div class="mb-4 rounded">
+                            <p>{{$user->name}}</p>
+                        </div>
+
+                @endforeach
+            </div>
         </div>
+
     </div>
 @endsection

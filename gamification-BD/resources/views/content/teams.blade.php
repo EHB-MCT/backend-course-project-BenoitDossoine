@@ -8,11 +8,15 @@
         @endcan
         <div class="grid grid-cols-3 gap-4 mt-4">
             @foreach($teamlist as $team)
-                <div class="teamTile border-solid border-2 border-sky-500 p-4 rounded-xl">
-                    <h2 class="text-lg">{{$team->name}}</h2>
-                    <p class="text-sm mt-4">{{$team->description}}</p>
-                    <p class="text-sm mt-2">Teached by: {{$team->docent}}</p>
-                    <button><a href="{{route('team',[$team->id])}}">See team</a></button>
+                <div class="teamTile mt-8 rounded-xl p-6 border-solid border-gray-400 shadow flex flex-col place-content-between">
+                    <div>
+                        <h2 class="text-2xl font-light uppercase">{{$team->name}}</h2>
+                        <p class="text-sm mt-4">{{$team->description}}</p>
+                    </div>
+                    <div class="flex flex-col">
+                        <p class="text-sm mt-2">Teached by: {{$team->docent}}</p>
+                        <button class="self-end"><a href="{{route('team',[$team->id])}}" class="uppercase font-extralight">See team</a></button>
+                    </div>
                 </div>
             @endforeach
         </div>
