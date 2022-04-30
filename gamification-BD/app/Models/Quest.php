@@ -21,4 +21,9 @@ class Quest extends Model
     {
         return $this->belongsTo(Team::class);
     }
+
+    public function achievement()
+    {
+        return $this->hasOne(Achievement::class);
+    }
 }
