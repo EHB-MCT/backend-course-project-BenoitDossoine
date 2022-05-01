@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Achievement;
 use App\Models\Quest;
 use App\Models\Team;
 use App\Models\User;
@@ -45,6 +46,12 @@ class DatabaseSeeder extends Seeder
         $quest->team_id=1;
         $quest->save();
 
+        $achievement = new Achievement();
+        $achievement->status = 'not completed';
+        $achievement->quest_id = 1;
+        $achievement->user_id = 1;
+        $achievement->save();
+
         $benoit = User::find(1);
         $benoit->teams()->attach(1);
         $benoit->teams()->attach(2);
@@ -53,5 +60,6 @@ class DatabaseSeeder extends Seeder
         $mike->teams()->attach(1);
 
         $teams = Team::factory()->count(3)->create();
+        $users = User::factory()->count(3)->create();
     }
 }
