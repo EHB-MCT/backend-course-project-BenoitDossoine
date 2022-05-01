@@ -34,3 +34,7 @@
 .btn-blue:hover{
     @apply bg-blue-700;
 }
+
+.btn-orange{
+    @apply bg-orange-500 text-white;
+}

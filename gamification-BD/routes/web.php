@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\QuestController;
+use App\Http\Controllers\AchievementController;
 use App\Models\Quest;
 use App\Models\Team;
 use Illuminate\Http\Request;
@@ -70,6 +71,20 @@ Route::post('/questcreate', function(Request $request){
     $quest->team_id=$teamId;
     $quest->save();
 
+    $team = Team::find($teamId);
+    $teamUsers = $team->users;
+
+    foreach ($teamUsers as $teamUser)
+    {
+        $achievement = new \App\Models\Achievement();
+        $achievement->status = 'not completed';
+        $achievement->quest_id = $quest->id;
+        $achievement->user_id = $teamUser->id;
+        $achievement->save();
+    }
     return redirect()->route('team',['team_id'=>$teamId]);
 })->name('questcreate');
+
+Route::post('/markStudentQuestPending', [AchievementController::class,'markStudentQuestPending'])->name('markStudentQuestPending');
+
 require __DIR__.'/auth.php';
