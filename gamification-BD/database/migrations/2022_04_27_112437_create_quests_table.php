@@ -19,7 +19,7 @@ return new class extends Migration
             $table->longText('description');
             $table->integer('experience');
             $table->integer('module')->nullable();
-            $table->integer('team_id');
+            $table->foreignId('team_id');
             $table->timestamps();
         });
     }

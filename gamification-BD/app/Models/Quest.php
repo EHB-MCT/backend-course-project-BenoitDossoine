@@ -22,8 +22,8 @@ class Quest extends Model
         return $this->belongsTo(Team::class);
     }
 
-    public function achievement()
+    public function achievements()
     {
-        return $this->hasOne(Achievement::class);
+        return $this->hasMany(Achievement::class);
     }
 }

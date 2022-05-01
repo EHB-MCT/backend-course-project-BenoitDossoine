@@ -11,11 +11,17 @@ class Achievement extends Model
 
     protected $fillable = [
         'status',
-        'quest_id'
+        'quest_id',
+        'user_id'
     ];
 
     public function quest()
     {
         return $this->belongsTo(Quest::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
