@@ -2,6 +2,19 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+@import './distort.css';
+
+html,
+.loginForm{
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.loginCard{
+    border: 2px black solid;
+    animation: glitch 4s linear infinite;
+    animation-delay: 5s;
+}
+
 
 .teamTile{
     background-color: #ffffff;
@@ -15,16 +28,25 @@
     background-color:#ffffff;
 }
 
-
-
 .btn {
-    @apply font-bold py-2 px-4 rounded;
+    @apply font-light px-4 py-2 rounded;
+    animation: glitch 4s linear infinite;
+    animation-delay: 5s;
+    text-transform: uppercase;
 }
 .btn-green {
     @apply bg-green-500 text-white;
 }
 .btn-green:hover {
     @apply bg-green-700;
+}
+
+.btn-white{
+    @apply bg-white text-black border border-black;
+}
+
+.btn-white:hover{
+    @apply bg-black text-white;
 }
 
 .btn-blue{
