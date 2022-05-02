@@ -87,4 +87,8 @@ Route::post('/questcreate', function(Request $request){
 
 Route::post('/markStudentQuestPending', [AchievementController::class,'markStudentQuestPending'])->name('markStudentQuestPending');
 
+Route::get('/team/{team_id}/members',function($teamId){
+    $team = Team::find($teamId);
+    return view('content.teammembers',["team"=>$team]);
+})->middleware(['auth'])->name('teammembers');
 require __DIR__.'/auth.php';

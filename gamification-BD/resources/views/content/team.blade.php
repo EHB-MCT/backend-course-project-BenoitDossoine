@@ -7,7 +7,7 @@
         <button class="btn btn-blue mb-4"><a href="{{route('newquest',[$team->id])}}">Add quest</a></button>
         @endcan
         @can('add students to teams')
-        <button class="btn btn-blue mb-4"><a href="">Add members</a></button>
+        <button class="btn btn-blue mb-4"><a href="{{route('teammembers',[$team->id])}}">Add members</a></button>
         @endcan
         <div class="teamContainer grid grid-cols-3 gap-4">
             <div class="questContainer col-span-2">

@@ -36,8 +36,12 @@ class PermissionSeeder extends Seeder
 
         $admin = Role::create(['name'=>'admin']);
 
-        $benoit = User::find(1);
-        $benoit->assignRole($member);
+        $users=User::all();
+        foreach($users as $user){
+            if($user->id !=2){
+                $user->assignRole($member);
+            }
+        }
 
         $mike = User::find(2);
         $mike->assignRole($manager);
