@@ -2,13 +2,13 @@
 
 @section('content')
     <div class="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <h1 class="text-xl">These are your teams:</h1>
+        <h1 class="text-xl font-light">YOUR TEAMS:</h1>
         @can('create teams')
         <button class="btn btn-white mt-4"><a href="{{route('newteam')}}">Create new team</a></button>
         @endcan
-        <div class="grid grid-cols-3 gap-4 mt-4">
+        <div class="grid grid-cols-3 gap-4 mt-2">
             @foreach($teamlist as $team)
-                <div class="teamTile mt-8 rounded-xl p-6 border-solid border-gray-400 shadow flex flex-col place-content-between">
+                <div class="teamTile mt-2 rounded-xl p-6 border-solid border-gray-400 shadow flex flex-col place-content-between">
                     <div>
                         <h2 class="text-2xl font-light uppercase">{{$team->name}}</h2>
                         <p class="text-sm mt-4">{{$team->description}}</p>

@@ -622,6 +622,9 @@ select {
 .col-span-2 {
   grid-column: span 2 / span 2;
 }
+.col-span-1 {
+  grid-column: span 1 / span 1;
+}
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -634,6 +637,9 @@ select {
 }
 .mb-4 {
   margin-bottom: 1rem;
+}
+.mt-6 {
+  margin-top: 1.5rem;
 }
 .ml-1 {
   margin-left: 0.25rem;
@@ -649,9 +655,6 @@ select {
 }
 .mb-8 {
   margin-bottom: 2rem;
-}
-.mt-6 {
-  margin-top: 1.5rem;
 }
 .mt-1 {
   margin-top: 0.25rem;
@@ -701,9 +704,6 @@ select {
 .h-16 {
   height: 4rem;
 }
-.h-10 {
-  height: 2.5rem;
-}
 .h-4 {
   height: 1rem;
 }
@@ -725,8 +725,8 @@ select {
 .w-5 {
   width: 1.25rem;
 }
-.w-auto {
-  width: auto;
+.w-1\/4 {
+  width: 25%;
 }
 .w-4 {
   width: 1rem;
@@ -746,11 +746,11 @@ select {
 .w-8 {
   width: 2rem;
 }
+.w-auto {
+  width: auto;
+}
 .w-1\/2 {
   width: 50%;
-}
-.w-1\/4 {
-  width: 25%;
 }
 .max-w-7xl {
   max-width: 80rem;
@@ -1011,13 +1011,13 @@ select {
   font-size: 1.875rem;
   line-height: 2.25rem;
 }
-.text-base {
-  font-size: 1rem;
-  line-height: 1.5rem;
-}
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
+}
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 .text-lg {
   font-size: 1.125rem;
@@ -1044,11 +1044,11 @@ select {
 .font-light {
   font-weight: 300;
 }
-.font-semibold {
-  font-weight: 600;
-}
 .font-thin {
   font-weight: 100;
+}
+.font-semibold {
+  font-weight: 600;
 }
 .uppercase {
   text-transform: uppercase;
@@ -1080,10 +1080,6 @@ select {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
-.text-gray-600 {
-  --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity));
-}
 .text-gray-400 {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
@@ -1095,6 +1091,10 @@ select {
 .text-green-600 {
   --tw-text-opacity: 1;
   color: rgb(22 163 74 / var(--tw-text-opacity));
+}
+.text-gray-600 {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 .text-gray-200 {
   --tw-text-opacity: 1;
@@ -1247,6 +1247,41 @@ select {
         transform: translate(0px,0) skew(0deg);
     }
 }
+.line{
+    position: absolute;
+    width: 1px;
+    opacity: 1;
+    background-color: #000;
+
+    top:100vh;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+}
+.x1{
+    -webkit-animation: glitchUp 4s linear infinite;
+            animation: glitchUp 4s linear infinite;
+    transform: rotate(20deg);
+}
+@-webkit-keyframes glitchUp{
+    0%{top: 100vh; opacity: 0;}
+    2%,12%,27%{opacity: 1;}
+    4%,10%,14%,25%,29%{opacity: 0;}
+
+    50%{top: 0vh; opacity: 0;}
+    75%{opacity: 0;}
+    100%{top: -100vh; opacity: 0;}
+}
+@keyframes glitchUp{
+    0%{top: 100vh; opacity: 0;}
+    2%,12%,27%{opacity: 1;}
+    4%,10%,14%,25%,29%{opacity: 0;}
+
+    50%{top: 0vh; opacity: 0;}
+    75%{opacity: 0;}
+    100%{top: -100vh; opacity: 0;}
+}
 html,
 .loginForm{
     font-family: 'Montserrat', sans-serif !important;
@@ -1257,6 +1292,14 @@ html,
             animation: glitch 4s linear infinite;
     -webkit-animation-delay: 5s;
             animation-delay: 5s;
+    box-shadow: 0px -5px 10px rgba(0,0,0,1),
+    0px 0px 5px rgba(255,255,255,0);;
+}
+.levelLogo{
+    -webkit-animation: glitch 3s linear infinite;
+            animation: glitch 3s linear infinite;
+    -webkit-animation-delay: 0.2s;
+            animation-delay: 0.2s;
 }
 .teamTile{
     background-color: #ffffff;

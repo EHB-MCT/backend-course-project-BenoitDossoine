@@ -40,5 +40,6 @@
                 <a href="{{ route('login') }}" class="underline uppercase font-ultralight pb-3">Log in</a>
             </div>
         </div>
+        <div class="line x1"></div>
     </body>
 </html>
