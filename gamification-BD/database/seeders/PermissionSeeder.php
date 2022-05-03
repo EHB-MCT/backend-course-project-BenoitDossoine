@@ -38,13 +38,19 @@ class PermissionSeeder extends Seeder
 
         $users=User::all();
         foreach($users as $user){
-            if($user->id !=2){
+            if($user->id !=2 || $user->id !=3){
                 $user->assignRole($member);
             }
         }
 
         $mike = User::find(2);
         $mike->assignRole($manager);
+        $mike->removeRole($member);
+
+        $mike = User::find(3);
+        $mike->assignRole($manager);
+        $mike->removeRole($member);
+
 
     }
 }

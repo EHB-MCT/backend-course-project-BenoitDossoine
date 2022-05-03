@@ -5,6 +5,7 @@ use App\Http\Controllers\QuestController;
 use App\Http\Controllers\AchievementController;
 use App\Models\Quest;
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -85,10 +86,14 @@ Route::post('/questcreate', function(Request $request){
     return redirect()->route('team',['team_id'=>$teamId]);
 })->name('questcreate');
 
-Route::post('/markStudentQuestPending', [AchievementController::class,'markStudentQuestPending'])->name('markStudentQuestPending');
+Route::post('/markStudentQuestPending', [AchievementController::class,'markStudentQuestPending'])->middleware(['auth'])->name('markStudentQuestPending');
+
 
 Route::get('/team/{team_id}/members',function($teamId){
     $team = Team::find($teamId);
-    return view('content.teammembers',["team"=>$team]);
+    $allUsers = User::role('member')->get();
+    return view('content.teammembers',["team"=>$team, "allUsers"=>$allUsers]);
 })->middleware(['auth'])->name('teammembers');
+
+Route::post('/team/{team_id}/addTeamMembers',[TeamController::class,'addMembers'])->middleware(['auth'])->name('addTeamMembers');
 require __DIR__.'/auth.php';
