@@ -10,7 +10,7 @@
             <button class="btn btn-white mb-4"><a href="{{route('teammembers',[$team->id])}}">Add members</a></button>
         @endcan
         @can('verify achievements')
-            <button class="btn btn-white mb-4"><a href="{{route('teammembers',[$team->id])}}">Check progress</a></button>
+            <button class="btn btn-white mb-4"><a href="{{route('teamprogress',[$team->id])}}">Check progress</a></button>
         @endcan
         <div class="teamContainer grid grid-cols-3 gap-4">
             <div class="questContainer col-span-2">

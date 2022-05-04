@@ -95,5 +95,12 @@ Route::get('/team/{team_id}/members',function($teamId){
     return view('content.teammembers',["team"=>$team, "allUsers"=>$allUsers]);
 })->middleware(['auth'])->name('teammembers');
 
+Route::get('/team/{team_id}/teamprogress',function($teamId){
+    $team = Team::find($teamId);
+    return view('content.progress',['team'=>$team]);
+})->middleware(['auth'])->name('teamprogress');
+
 Route::post('/team/{team_id}/addTeamMembers',[TeamController::class,'addMembers'])->middleware(['auth'])->name('addTeamMembers');
+
+Route::post('team/{team_id}/updateAchievement',[AchievementController::class,'updateAchievement'])->middleware(['auth'])->name('updateAchievement');
 require __DIR__.'/auth.php';
