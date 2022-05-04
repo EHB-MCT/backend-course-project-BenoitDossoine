@@ -16,6 +16,16 @@
     transform: rotate(20deg);
 }
 
+.x2{
+    animation: glitchUp 6s linear infinite;
+    transform: rotate(5deg) translate(-20%,0);
+}
+
+.x3{
+    animation: glitchUp 3s linear infinite;
+    transform: translate(-200px,0);
+}
+
 @keyframes glitchUp{
     0%{top: 100vh; opacity: 0;}
     2%,12%,27%{opacity: 1;}
