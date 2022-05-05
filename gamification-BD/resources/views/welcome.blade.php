@@ -18,7 +18,8 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
-    <body class="antialiased">
+    <body class="antialiased overflow-hidden">
+    <div class="h-screen max-h-screen overflow-hidden">
         <div class="relative flex items-top justify-center min-h-screen bg-white dark:bg-white sm:items-center py-4 sm:pt-0">
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
@@ -43,5 +44,6 @@
         <div class="line x1"></div>
         <div class="line x2"></div>
         <div class="line x3"></div>
+    </div>
     </body>
 </html>

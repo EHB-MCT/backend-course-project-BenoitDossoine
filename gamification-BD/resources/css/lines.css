@@ -9,6 +9,8 @@
     left: 0px;
     right: 0px;
     margin: auto;
+
+    pointer-events: none;
 }
 
 .x1{
@@ -18,12 +20,12 @@
 
 .x2{
     animation: glitchUp 6s linear infinite;
-    transform: rotate(5deg) translate(-20%,0);
+    transform: rotate(5deg) translate(200px, 0);
 }
 
 .x3{
-    animation: glitchUp 3s linear infinite;
-    transform: translate(-200px,0);
+    animation: glitchDown 3s linear infinite;
+    transform: translate(-200px,0) rotate(78deg);
 }
 
 @keyframes glitchUp{
@@ -31,7 +33,17 @@
     2%,12%,27%{opacity: 1;}
     4%,10%,14%,25%,29%{opacity: 0;}
 
-    50%{top: 0vh; opacity: 0;}
+    50%{top: 0; opacity: 0;}
     75%{opacity: 0;}
     100%{top: -100vh; opacity: 0;}
+}
+
+@keyframes glitchDown{
+    0%{top: 0;bottom: 100vh; opacity: 0;}
+    2%,12%,27%{opacity: 1;}
+    4%,10%,14%,25%,29%{opacity: 0;}
+
+    50%{bottom: 0; opacity: 0;}
+    75%{opacity: 0;}
+    100%{bottom: -100vh; opacity: 0;}
 }

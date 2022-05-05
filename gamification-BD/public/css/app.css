@@ -716,8 +716,14 @@ select {
 .h-8 {
   height: 2rem;
 }
+.h-screen {
+  height: 100vh;
+}
 .h-52 {
   height: 13rem;
+}
+.max-h-screen {
+  max-height: 100vh;
 }
 .min-h-screen {
   min-height: 100vh;
@@ -803,6 +809,9 @@ select {
 }
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.flex-row {
+  flex-direction: row;
 }
 .flex-col {
   flex-direction: column;
@@ -904,6 +913,10 @@ select {
 .border-gray-400 {
   --tw-border-opacity: 1;
   border-color: rgb(156 163 175 / var(--tw-border-opacity));
+}
+.border-black {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 .bg-white {
   --tw-bg-opacity: 1;
@@ -1258,6 +1271,8 @@ select {
     left: 0px;
     right: 0px;
     margin: auto;
+
+    pointer-events: none;
 }
 .x1{
     -webkit-animation: glitchUp 4s linear infinite;
@@ -1267,19 +1282,19 @@ select {
 .x2{
     -webkit-animation: glitchUp 6s linear infinite;
             animation: glitchUp 6s linear infinite;
-    transform: rotate(5deg) translate(-20%,0);
+    transform: rotate(5deg) translate(200px, 0);
 }
 .x3{
-    -webkit-animation: glitchUp 3s linear infinite;
-            animation: glitchUp 3s linear infinite;
-    transform: translate(-200px,0);
+    -webkit-animation: glitchDown 3s linear infinite;
+            animation: glitchDown 3s linear infinite;
+    transform: translate(-200px,0) rotate(78deg);
 }
 @-webkit-keyframes glitchUp{
     0%{top: 100vh; opacity: 0;}
     2%,12%,27%{opacity: 1;}
     4%,10%,14%,25%,29%{opacity: 0;}
 
-    50%{top: 0vh; opacity: 0;}
+    50%{top: 0; opacity: 0;}
     75%{opacity: 0;}
     100%{top: -100vh; opacity: 0;}
 }
@@ -1288,9 +1303,27 @@ select {
     2%,12%,27%{opacity: 1;}
     4%,10%,14%,25%,29%{opacity: 0;}
 
-    50%{top: 0vh; opacity: 0;}
+    50%{top: 0; opacity: 0;}
     75%{opacity: 0;}
     100%{top: -100vh; opacity: 0;}
+}
+@-webkit-keyframes glitchDown{
+    0%{top: 0;bottom: 100vh; opacity: 0;}
+    2%,12%,27%{opacity: 1;}
+    4%,10%,14%,25%,29%{opacity: 0;}
+
+    50%{bottom: 0; opacity: 0;}
+    75%{opacity: 0;}
+    100%{bottom: -100vh; opacity: 0;}
+}
+@keyframes glitchDown{
+    0%{top: 0;bottom: 100vh; opacity: 0;}
+    2%,12%,27%{opacity: 1;}
+    4%,10%,14%,25%,29%{opacity: 0;}
+
+    50%{bottom: 0; opacity: 0;}
+    75%{opacity: 0;}
+    100%{bottom: -100vh; opacity: 0;}
 }
 html,
 .loginForm{
@@ -1302,8 +1335,8 @@ html,
             animation: glitch 4s linear infinite;
     -webkit-animation-delay: 5s;
             animation-delay: 5s;
-    box-shadow: 0px -5px 10px rgba(0,0,0,1),
-    0px 0px 5px rgba(255,255,255,0);;
+    box-shadow: 0px -1px 6px rgba(0,0,0,1),
+    0px 0px 5px rgba(255,255,255,0);
 }
 .levelLogo{
     -webkit-animation: glitch 3s linear infinite;
@@ -1389,6 +1422,12 @@ html,
 .hover\:bg-gray-50:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+}
+.hover\:stroke-green-700:hover {
+  stroke: #15803d;
+}
+.hover\:stroke-red-700:hover {
+  stroke: #b91c1c;
 }
 .hover\:text-gray-500:hover {
   --tw-text-opacity: 1;
