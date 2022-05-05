@@ -18,7 +18,19 @@ class TeamController extends Controller
     public function teamData($teamId){
         $team = Team::find($teamId);
         $quests = $team->quests;
-        return view('content.team',["team"=>$team,"quests"=>$quests]);
+
+        $leaderboard = $team->users
+            ->sortByDesc(function($member,$key) use ($teamId){
+                return $member->achievements
+                    ->where('team_id',$teamId)
+                    ->where('status','completed')
+                    ->sum(function($achievement)
+                    {
+                        return $achievement->quest->experience;
+                    });
+        });
+
+        return view('content.team',["team"=>$team,"leaderboard"=>$leaderboard]);
     }
 
     public function addMembers(Request $request, Factory $validator){

@@ -38,12 +38,12 @@
                 @endforeach
             </div>
             <div class="membersContainer">
-                <p class="text-3xl font-light mb-4">Members</p>
-                @foreach($team->users as $user)
-                        <div class="mb-4 rounded">
+                <p class="text-3xl font-light mb-4">Team leaderboard</p>
+                @foreach($team->users->sortByDesc('experience') as $user)
+                        <div class="mb-4 rounded flex justify-between">
                             <p>{{$user->name}}</p>
+                            <p>{{$user->experience}}</p>
                         </div>
-
                 @endforeach
             </div>
         </div>
