@@ -4,6 +4,7 @@
     <div class="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h1 class="text-xl">Create a new quest</h1>
         <form method="POST" action="{{route('questcreate')}}" class="flex flex-col w-1/2 mx-auto">
+            @include('partials.error')
             <label for="name" class="mb-2">Quest name</label>
             <input type="text" name="name" id="questName" class="mb-4">
 
