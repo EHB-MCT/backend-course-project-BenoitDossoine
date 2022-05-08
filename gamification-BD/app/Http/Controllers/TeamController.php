@@ -56,7 +56,7 @@ class TeamController extends Controller
                 foreach($quests as $quest){
                     $achievement = new Achievement();
                     $achievement->status = 'not completed';
-                    $achievement->quest_id=1;
+                    $achievement->quest_id=$quest->id;
                     $achievement->user_id=$newUserId;
                     $achievement->save();
                 }
