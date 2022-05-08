@@ -54,24 +54,7 @@ Route::middleware(['auth'])->group(function(){
         })->name('newteam');
 
         //handling of new team data
-        Route::post('/teamcreate', function(Request $request){
-            $name = $request->input('name');
-            $description = $request->input('description');
-            $user = auth()->user();
-            $username = $user->name;
-
-
-            $team = new Team();
-            $team->name=$name;
-            $team->description=$description;
-            $team->docent=$username;
-            $team->save();
-
-            $team->users()->attach(auth()->id());
-
-            return redirect()->back();
-
-        })->name('teamcreate');
+        Route::post('/teamcreate', [TeamController::class,"makeNewTeam"])->name('teamcreate');
 
         //form to create new quest
         Route::get('/team/{team_id}/newquest', [QuestController::class,"newTeamQuest"])->name('newquest');

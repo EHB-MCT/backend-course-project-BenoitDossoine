@@ -33,6 +33,33 @@ class TeamController extends Controller
         return view('content.team',["team"=>$team,"leaderboard"=>$leaderboard]);
     }
 
+    public function makeNewTeam(Request $request, Factory $validator){
+        $validation = $validator->make($request->all(),[
+            'name'=>'required',
+            'description'=>'required'
+        ]);
+
+        if($validation->fails()){
+            return redirect()->back()->withErrors($validation);
+        } else {
+            $name = $request->input('name');
+            $description = $request->input('description');
+            $user = auth()->user();
+            $username = $user->name;
+
+            $team = new Team();
+            $team->name=$name;
+            $team->description=$description;
+            $team->docent=$username;
+            $team->save();
+
+            $team->users()->attach(auth()->id());
+
+            return redirect()->route('teams');
+        }
+
+    }
+
     public function addMembers(Request $request, Factory $validator){
 
         $validation = $validator->make($request->all(),[

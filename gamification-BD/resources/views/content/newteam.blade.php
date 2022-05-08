@@ -4,6 +4,7 @@
     <div class="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h1 class="text-xl">Create a new team</h1>
         <form method="POST" action="{{route('teamcreate')}}" class="flex flex-col w-1/2 mx-auto">
+            @include('partials.error')
             <label for="name" class="mt-4">Your team's name</label>
             <input type="text" name="name" id="name">
 
