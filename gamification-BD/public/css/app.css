@@ -666,6 +666,10 @@ select {
   margin-left: 1rem;
   margin-right: 1rem;
 }
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
 .ml-3 {
   margin-left: 0.75rem;
 }
@@ -880,6 +884,9 @@ select {
 .justify-between {
   justify-content: space-between;
 }
+.justify-evenly {
+  justify-content: space-evenly;
+}
 .justify-items-center {
   justify-items: center;
 }
@@ -901,6 +908,9 @@ select {
 }
 .self-end {
   align-self: flex-end;
+}
+.self-center {
+  align-self: center;
 }
 .overflow-hidden {
   overflow: hidden;
@@ -1516,6 +1526,12 @@ html,
 .hover\:bg-gray-50:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+}
+.hover\:fill-green-600:hover {
+  fill: #16a34a;
+}
+.hover\:fill-red-500:hover {
+  fill: #ef4444;
 }
 .hover\:stroke-green-700:hover {
   stroke: #15803d;

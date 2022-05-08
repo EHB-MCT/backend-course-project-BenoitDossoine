@@ -18,6 +18,11 @@
                     <x-nav-link :href="route('leaderboard')" :active="request()->routeIs('leaderboard')">
                         Leaderboard
                     </x-nav-link>
+                    @can('change roles')
+                    <x-nav-link :href="route('admin')" :active="request()->routeIs('admin')">
+                        Admin panel
+                    </x-nav-link>
+                    @endcan
                 </div>
             </div>
 

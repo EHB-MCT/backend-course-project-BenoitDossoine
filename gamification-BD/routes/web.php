@@ -46,7 +46,7 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/markStudentQuestPending', [AchievementController::class,'markStudentQuestPending'])->name('markStudentQuestPending');
 
     //routes only available to managers
-    Route::middleware(['role:manager'])->group(function(){
+    Route::middleware(['role:manager|admin'])->group(function(){
 
         //form to create new team
         Route::get('/newteam', function(){
@@ -76,10 +76,16 @@ Route::middleware(['auth'])->group(function(){
         })->name('teamprogress');
 
         //handle data to add new members to team
-        Route::post('/team/{team_id}/addTeamMembers',[TeamController::class,'addMembers'])->middleware(['auth'])->name('addTeamMembers');
+        Route::post('/team/{team_id}/addTeamMembers',[TeamController::class,'addMembers'])->name('addTeamMembers');
 
         //handle data to update a member's achievement
-        Route::post('team/{team_id}/updateAchievement',[AchievementController::class,'updateAchievement'])->middleware(['auth'])->name('updateAchievement');
+        Route::post('team/{team_id}/updateAchievement',[AchievementController::class,'updateAchievement'])->name('updateAchievement');
+    });
+
+    Route::middleware(['role:admin'])->group(function(){
+        Route::get('/admin',[\App\Http\Controllers\AdminController::class,'usersList'])->name('admin');
+
+        Route::post('/changeMemberRole',[\App\Http\Controllers\AdminController::class,'changeMemberRole'])->name('changeMemberRole');
     });
 
 });
