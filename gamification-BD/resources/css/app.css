@@ -39,7 +39,7 @@ html,
 .btn {
     @apply font-light px-4 py-2 rounded;
     animation: glitch 4s linear infinite;
-    animation-delay: 5s;
+    animation-delay: 0s;
     text-transform: uppercase;
 }
 .btn-green {
@@ -53,9 +53,42 @@ html,
     @apply bg-white text-black border border-black;
 }
 
-.btn-white:hover{
-    @apply bg-black text-white;
+/*.btn-white:hover{*/
+/*    @apply bg-black text-white;*/
+/*}*/
+
+.completedBtn{
+    position: relative;
+    color: #000;
+    transition: all 1s;
+    box-sizing: border-box;
+    overflow: hidden;
 }
+
+.completedBtn:hover{
+    color: #fff;
+}
+
+.completedBtn:after{
+    content:'';
+    background-color: #000;
+    width: 100%;
+    height: 200%;
+    position: absolute;
+    left:0;
+    top:0;
+    z-index: -1;
+    transform: scaleX(0);
+    border: 1px solid black;
+    transform-origin: top left;
+    transition: all 1s;
+}
+
+.completedBtn:hover:after{
+    transform: scaleX(100%);
+}
+
+
 
 .btn-blue{
     @apply bg-blue-500 text-white;
@@ -67,4 +100,15 @@ html,
 
 .btn-orange{
     @apply bg-orange-500 text-white;
+}
+
+.subtitle:after{
+    content:'';
+    bottom:0;
+    left: 25%;
+    display: block;
+    max-width: 50px;
+    width: 20%;
+    height: 100%;
+    border-bottom: 2px solid black;
 }

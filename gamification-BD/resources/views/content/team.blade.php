@@ -32,6 +32,8 @@
                             </form>
                         @elseif($quest->achievements->where('user_id',auth()->user()->id)->first()->status == 'pending')
                             <button class="btn btn-orange mt-6 disabled">Pending</button>
+                        @elseif($quest->achievements->where('user_id',auth()->user()->id)->first()->status == 'completed')
+                            <button class="btn btn-white completedBtn mt-6 disabled">Completed</button>
                         @endif
                         @endcan
                     </div>

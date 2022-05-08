@@ -28,6 +28,11 @@
     transform: translate(-200px,0) rotate(78deg);
 }
 
+.x4{
+    animation: glitchDown 2s linear infinite;
+    transform: translate(300px,0) rotate(40deg);
+}
+
 @keyframes glitchUp{
     0%{top: 100vh; opacity: 0;}
     2%,12%,27%{opacity: 1;}
