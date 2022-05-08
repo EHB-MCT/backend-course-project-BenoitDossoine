@@ -35,22 +35,22 @@ class PermissionSeeder extends Seeder
         $manager->givePermissionTo('edit team');
 
         $admin = Role::create(['name'=>'admin']);
+        $admin->givePermissionTo('create teams');
+        $admin->givePermissionTo('add students to teams');
+        $admin->givePermissionTo('create quests');
+        $admin->givePermissionTo('verify achievements');
+        $admin->givePermissionTo('edit team');
+        $admin->givePermissionTo('change roles');
 
         $users=User::all();
         foreach($users as $user){
-            if($user->id !=2 || $user->id !=3){
+            if($user->id !=1){
                 $user->assignRole($member);
             }
         }
 
-        $mike = User::find(2);
-        $mike->assignRole($manager);
+        $mike = User::find(1);
+        $mike->assignRole($admin);
         $mike->removeRole($member);
-
-        $mike = User::find(3);
-        $mike->assignRole($manager);
-        $mike->removeRole($member);
-
-
     }
 }

@@ -19,48 +19,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-        $user = new User();
-        $user->name = "Benoit";
-        $user->email = "benoit@dossoine.be";
-        $user->password = Hash::make("student");
-        $user->experience = 0;
-        $user->save();
 
-        $user = new User();
-        $user->name = "Mike";
-        $user->email = "mike@derycke.be";
-        $user->password = Hash::make("docent");
-        $user->save();
-
-
-        $team = new Team();
-        $team->name = "Web 2";
-        $team->description = "This course is given in semester 1.";
-        $team->docent = "Mike Derycke";
-        $team->save();
-
-        $quest = new Quest();
-        $quest->name = "Start web 2";
-        $quest->description = "Let's get started!";
-        $quest->experience = 8;
-        $quest->team_id=1;
-        $quest->save();
-
-        $achievement = new Achievement();
-        $achievement->status = 'not completed';
-        $achievement->quest_id = 1;
-        $achievement->user_id = 1;
-        $achievement->save();
-
-        $benoit = User::find(1);
-        $benoit->teams()->attach(1);
-        $benoit->teams()->attach(2);
-
-        $mike = User::find(2);
-        $mike->teams()->attach(1);
-
-        $teams = Team::factory()->count(3)->create();
-        $users = User::factory()->count(3)->create();
+        $this->call([
+            UserSeeder::class,
+            PermissionSeeder::class,
+        ]);
     }
 }
