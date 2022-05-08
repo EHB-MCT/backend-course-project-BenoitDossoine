@@ -15,6 +15,9 @@
                     <x-nav-link :href="route('teams')" :active="request()->routeIs('teams')">
                         Teams
                     </x-nav-link>
+                    <x-nav-link :href="route('leaderboard')" :active="request()->routeIs('leaderboard')">
+                        Leaderboard
+                    </x-nav-link>
                 </div>
             </div>
 

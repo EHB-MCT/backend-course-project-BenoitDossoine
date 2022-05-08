@@ -103,4 +103,10 @@ Route::get('/team/{team_id}/teamprogress',function($teamId){
 Route::post('/team/{team_id}/addTeamMembers',[TeamController::class,'addMembers'])->middleware(['auth'])->name('addTeamMembers');
 
 Route::post('team/{team_id}/updateAchievement',[AchievementController::class,'updateAchievement'])->middleware(['auth'])->name('updateAchievement');
+
+Route::get('/leaderboard', function(){
+    $users = User::all()->sortByDesc('experience');
+    return view('content.leaderboard',['users'=>$users]);
+})->middleware(['auth'])->name('leaderboard');
+
 require __DIR__.'/auth.php';
