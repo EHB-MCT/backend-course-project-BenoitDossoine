@@ -8,6 +8,7 @@ use App\Models\Team;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Auth\Middleware\Authorize;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,89 +25,108 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::middleware(['auth'])->group(function(){
 
-Route::get('/teams',[TeamController::class,"allTeams"])->middleware(['auth'])->name('teams');
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 
-Route::get('/newteam', function(){
-    return view('content.newteam');
-})->middleware(['auth'])->name('newteam');
+    //team overview
+    Route::get('/teams',[TeamController::class,"allTeams"])->name('teams');
 
-Route::post('/teamcreate', function(Request $request){
-    $name = $request->input('name');
-    $description = $request->input('description');
-    $user = auth()->user();
-    $username = $user->name;
+    //specific team
+    Route::get('/team/{team_id}',[TeamController::class,"teamData"])->name('team');
 
+    //leaderboard
+    Route::get('/leaderboard', function(){
+        $users = User::all()->sortByDesc('experience');
+        return view('content.leaderboard',['users'=>$users]);
+    })->name('leaderboard');
 
-    $team = new Team();
-    $team->name=$name;
-    $team->description=$description;
-    $team->docent=$username;
-    $team->save();
+    Route::post('/markStudentQuestPending', [AchievementController::class,'markStudentQuestPending'])->name('markStudentQuestPending');
 
-    $team->users()->attach(auth()->id());
+    //routes only available to managers
+    Route::middleware(['role:manager'])->group(function(){
 
-    return redirect()->back();
+        //form to create new team
+        Route::get('/newteam', function(){
+            return view('content.newteam');
+        })->name('newteam');
 
-})->name('teamcreate');
-
-Route::get('/team/{team_id}',[TeamController::class,"teamData"])->name('team');
-
-Route::get('/team/{team_id}/newquest', [QuestController::class,"newTeamQuest"])->middleware(['auth'])->name('newquest');
-
-Route::post('/questcreate', function(Request $request){
-    $name = $request->input('name');
-    $description = $request->input('description');
-    $experience = $request->input('experience');
-    $teamId = $request->input('teamId');
-//    $module = $request->input('module');
+        //handling of new team data
+        Route::post('/teamcreate', function(Request $request){
+            $name = $request->input('name');
+            $description = $request->input('description');
+            $user = auth()->user();
+            $username = $user->name;
 
 
-    $quest = new Quest();
-    $quest->name=$name;
-    $quest->description=$description;
-    $quest->experience=$experience;
-    $quest->team_id=$teamId;
-    $quest->save();
+            $team = new Team();
+            $team->name=$name;
+            $team->description=$description;
+            $team->docent=$username;
+            $team->save();
 
-    $team = Team::find($teamId);
-    $teamUsers = $team->users;
+            $team->users()->attach(auth()->id());
 
-    foreach ($teamUsers as $teamUser)
-    {
-        $achievement = new \App\Models\Achievement();
-        $achievement->status = 'not completed';
-        $achievement->quest_id = $quest->id;
-        $achievement->user_id = $teamUser->id;
-        $achievement->save();
-    }
-    return redirect()->route('team',['team_id'=>$teamId]);
-})->name('questcreate');
+            return redirect()->back();
 
-Route::post('/markStudentQuestPending', [AchievementController::class,'markStudentQuestPending'])->middleware(['auth'])->name('markStudentQuestPending');
+        })->name('teamcreate');
+
+        //form to create new quest
+        Route::get('/team/{team_id}/newquest', [QuestController::class,"newTeamQuest"])->name('newquest');
+
+        //handling of new quest data
+        Route::post('/questcreate', function(Request $request){
+            $name = $request->input('name');
+            $description = $request->input('description');
+            $experience = $request->input('experience');
+            $teamId = $request->input('teamId');
+//          $module = $request->input('module');
 
 
-Route::get('/team/{team_id}/members',function($teamId){
-    $team = Team::find($teamId);
-    $allUsers = User::role('member')->get();
-    return view('content.teammembers',["team"=>$team, "allUsers"=>$allUsers]);
-})->middleware(['auth'])->name('teammembers');
+            $quest = new Quest();
+            $quest->name=$name;
+            $quest->description=$description;
+            $quest->experience=$experience;
+            $quest->team_id=$teamId;
+            $quest->save();
 
-Route::get('/team/{team_id}/teamprogress',function($teamId){
-    $team = Team::find($teamId);
-    return view('content.progress',['team'=>$team]);
-})->middleware(['auth'])->name('teamprogress');
+            $team = Team::find($teamId);
+            $teamUsers = $team->users;
 
-Route::post('/team/{team_id}/addTeamMembers',[TeamController::class,'addMembers'])->middleware(['auth'])->name('addTeamMembers');
+            foreach ($teamUsers as $teamUser)
+            {
+                $achievement = new \App\Models\Achievement();
+                $achievement->status = 'not completed';
+                $achievement->quest_id = $quest->id;
+                $achievement->user_id = $teamUser->id;
+                $achievement->save();
+            }
+            return redirect()->route('team',['team_id'=>$teamId]);
+        })->name('questcreate');
 
-Route::post('team/{team_id}/updateAchievement',[AchievementController::class,'updateAchievement'])->middleware(['auth'])->name('updateAchievement');
 
-Route::get('/leaderboard', function(){
-    $users = User::all()->sortByDesc('experience');
-    return view('content.leaderboard',['users'=>$users]);
-})->middleware(['auth'])->name('leaderboard');
+        //overview of members and possibility to add multiple
+        Route::get('/team/{team_id}/members',function($teamId){
+            $team = Team::find($teamId);
+            $allUsers = User::role('member')->get();
+            return view('content.teammembers',["team"=>$team, "allUsers"=>$allUsers]);
+        })->name('teammembers');
+
+        //overview of member's quests to approve
+        Route::get('/team/{team_id}/teamprogress',function($teamId){
+            $team = Team::find($teamId);
+            return view('content.progress',['team'=>$team]);
+        })->name('teamprogress');
+
+        //handle data to add new members to team
+        Route::post('/team/{team_id}/addTeamMembers',[TeamController::class,'addMembers'])->middleware(['auth'])->name('addTeamMembers');
+
+        //handle data to update a member's achievement
+        Route::post('team/{team_id}/updateAchievement',[AchievementController::class,'updateAchievement'])->middleware(['auth'])->name('updateAchievement');
+    });
+
+});
 
 require __DIR__.'/auth.php';
