@@ -999,6 +999,9 @@ select {
 .fill-current {
   fill: currentColor;
 }
+.fill-black {
+  fill: #000;
+}
 .p-2 {
   padding: 0.5rem;
 }
@@ -1399,6 +1402,9 @@ html,
 .loginForm{
     font-family: 'Montserrat', sans-serif !important;
 }
+h2{
+    margin-bottom: 40px;
+}
 .loginCard{
     border: 2px black solid;
     -webkit-animation: glitch 4s linear infinite;
@@ -1527,8 +1533,8 @@ html,
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
-.hover\:fill-green-600:hover {
-  fill: #16a34a;
+.hover\:fill-green-500:hover {
+  fill: #22c55e;
 }
 .hover\:fill-red-500:hover {
   fill: #ef4444;

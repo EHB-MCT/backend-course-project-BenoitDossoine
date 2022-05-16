@@ -45,7 +45,7 @@ Route::middleware(['auth'])->group(function(){
 
     Route::post('/markStudentQuestPending', [AchievementController::class,'markStudentQuestPending'])->name('markStudentQuestPending');
 
-    //routes only available to managers
+    //routes only available to managers and admins
     Route::middleware(['role:manager|admin'])->group(function(){
 
         //form to create new team
@@ -86,6 +86,8 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/admin',[\App\Http\Controllers\AdminController::class,'usersList'])->name('admin');
 
         Route::post('/changeMemberRole',[\App\Http\Controllers\AdminController::class,'changeMemberRole'])->name('changeMemberRole');
+
+        Route::post('/deleteUser',[\App\Http\Controllers\AdminController::class,'deleteUser'])->name('deleteUser');
     });
 
 });

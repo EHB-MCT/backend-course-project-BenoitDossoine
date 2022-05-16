@@ -11,7 +11,8 @@ class AdminController extends Controller
     public function usersList(){
         $users = User::all();
         $teams = Team::all();
-        return view('content.admin',["users"=>$users,"teams"=>$teams]);
+        $adminCount = User::role('admin')->count();
+        return view('content.admin',["users"=>$users,"teams"=>$teams,"admincount"=>$adminCount]);
     }
 
     public function changeMemberRole(Request $request){
@@ -28,6 +29,12 @@ class AdminController extends Controller
 
         $user->assignRole($newRole);
 
+        return redirect()->back();
+    }
+
+    public function deleteUser(Request $request){
+        $user = User::find($request->input('userId'));
+        $user->delete();
         return redirect()->back();
     }
 }
