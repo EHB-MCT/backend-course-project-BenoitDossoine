@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Models\Achievement;
+use App\Models\Quest;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,6 @@ class TeamController extends Controller
 
     public function teamData($teamId){
         $team = Team::find($teamId);
-        $quests = $team->quests;
 
         $leaderboard = $team->users
             ->sortByDesc(function($member,$key) use ($teamId){
@@ -30,7 +30,9 @@ class TeamController extends Controller
                     });
         });
 
-        return view('content.team',["team"=>$team,"leaderboard"=>$leaderboard]);
+        $maxModule = Quest::where('team_id',$teamId)->max('module');
+
+        return view('content.team',["team"=>$team,"leaderboard"=>$leaderboard,"maxModule"=>$maxModule]);
     }
 
     public function makeNewTeam(Request $request, Factory $validator){

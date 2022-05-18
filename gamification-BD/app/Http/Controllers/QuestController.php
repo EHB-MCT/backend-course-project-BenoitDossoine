@@ -27,13 +27,14 @@ class QuestController extends Controller
             $description = $request->input('description');
             $experience = $request->input('experience');
             $teamId = $request->input('teamId');
-//          $module = $request->input('module');
+            $module = $request->input('module');
 
             $quest = new Quest();
             $quest->name = $name;
             $quest->description = $description;
             $quest->experience = $experience;
             $quest->team_id = $teamId;
+            $quest->module = $module;
             $quest->save();
 
             $team = Team::find($teamId);

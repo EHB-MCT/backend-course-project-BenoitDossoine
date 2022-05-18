@@ -11,6 +11,9 @@
             <label for="description" class="mb-2">Goal</label>
             <input type="textarea" name="description" id="questDescription" class="h-52 mb-4">
 
+            <label for="module" class="mb-2">Module</label>
+            <input type="number" name="module" id="module" class="mb-4">
+
             <label for="experience" class="mb-2">Experience points</label>
             <input type="number" name="experience" id="number" class="mb-4">
 
