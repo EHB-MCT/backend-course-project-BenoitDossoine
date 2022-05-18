@@ -16,7 +16,8 @@ class QuestController extends Controller
         $validation = $validator->make($request->all(),[
             'name'=>'required',
             'description'=>'required',
-            'experience'=>'required|numeric'
+            'experience'=>'required|numeric',
+            'module'=>'nullable|numeric|gt:0',
         ]);
 
         if($validation->fails()){
@@ -61,7 +62,8 @@ class QuestController extends Controller
         $validation = $validator->make($request->all(),[
             'name'=>'required',
             'description'=>'required',
-            'experience'=>'required|numeric'
+            'experience'=>'required|numeric',
+            'module'=>'nullable|numeric|gt:0',
         ]);
 
         if($validation->fails()){
