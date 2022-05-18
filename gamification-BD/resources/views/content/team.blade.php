@@ -4,13 +4,13 @@
     <div class="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="text-center uppercase text-6xl font-extralight">{{$team->name}}</h2>
         @can('create quests')
-            <button class="btn btn-white mb-4"><a href="{{route('newquest',[$team->id])}}">Add quest</a></button>
+            <button class="btn btn-white mb-8"><a href="{{route('newquest',[$team->id])}}">Add quest</a></button>
         @endcan
         @can('add students to teams')
-            <button class="btn btn-white mb-4"><a href="{{route('teammembers',[$team->id])}}">Add members</a></button>
+            <button class="btn btn-white mb-8"><a href="{{route('teammembers',[$team->id])}}">Add members</a></button>
         @endcan
         @can('verify achievements')
-            <button class="btn btn-white mb-4"><a href="{{route('teamprogress',[$team->id])}}">Check progress</a></button>
+            <button class="btn btn-white mb-8"><a href="{{route('teamprogress',[$team->id])}}">Check progress</a></button>
         @endcan
         <div class="teamContainer grid grid-cols-3 gap-4">
             <div class="questContainer col-span-2">
@@ -101,10 +101,12 @@
             <div class="membersContainer">
                 <p class="text-3xl font-light mb-4">Team leaderboard</p>
                 @foreach($team->users->sortByDesc('experience') as $user)
-                        <div class="mb-4 rounded flex justify-between">
+                        @if(!is_null($user->experience))
+                        <div class="mb-4 mx-2 rounded flex justify-between">
                             <p>{{$user->name}}</p>
                             <p>{{$user->experience}} XP</p>
                         </div>
+                        @endif
                 @endforeach
             </div>
         </div>
