@@ -80,6 +80,8 @@ Route::middleware(['auth'])->group(function(){
 
         //handle data to update a member's achievement
         Route::post('team/{team_id}/updateAchievement',[AchievementController::class,'updateAchievement'])->name('updateAchievement');
+
+        Route::post('team/deleteQuest',[QuestController::class,'deleteQuest'])->name('deleteQuest');
     });
 
     Route::middleware(['role:admin'])->group(function(){

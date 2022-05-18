@@ -49,4 +49,10 @@ class QuestController extends Controller
             return redirect()->route('team', ['team_id' => $teamId]);
         }
     }
+
+    public function deleteQuest(Request $request){
+        $quest = Quest::find($request->input('questId'));
+        $quest->delete();
+        return redirect()->back();
+    }
 }
