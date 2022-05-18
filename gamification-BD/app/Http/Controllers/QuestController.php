@@ -56,4 +56,34 @@ class QuestController extends Controller
         $quest->delete();
         return redirect()->back();
     }
+
+    public function editQuest(Request $request, Factory $validator){
+        $validation = $validator->make($request->all(),[
+            'name'=>'required',
+            'description'=>'required',
+            'experience'=>'required|numeric'
+        ]);
+
+        if($validation->fails()){
+            return redirect()->back()->withErrors($validation);
+        } else {
+
+            $name = $request->input('name');
+            $description = $request->input('description');
+            $experience = $request->input('experience');
+            $teamId = $request->input('teamId');
+            $module = $request->input('module');
+            $questId = $request->input('questId');
+
+            $quest = Quest::find($questId);
+            $quest->name = $name;
+            $quest->description = $description;
+            $quest->experience = $experience;
+            $quest->team_id = $teamId;
+            $quest->module = $module;
+            $quest->save();
+        }
+        return redirect()->route('team', ['team_id' => $teamId]);
+
+    }
 }

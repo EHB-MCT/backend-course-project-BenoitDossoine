@@ -82,6 +82,14 @@ Route::middleware(['auth'])->group(function(){
         Route::post('team/{team_id}/updateAchievement',[AchievementController::class,'updateAchievement'])->name('updateAchievement');
 
         Route::post('team/deleteQuest',[QuestController::class,'deleteQuest'])->name('deleteQuest');
+
+        Route::get('/team/{team_id}/editquest/{quest_id}',function($teamId,$questId){
+            $quest = \App\Models\Quest::find($questId);
+            $team = Team::find($teamId);
+            return view('content.editquest',["quest"=>$quest,"team"=>$team]);
+        })->name('editQuestForm');
+
+        Route::post('/editquest', [QuestController::class,"editQuest"])->name('editquest');
     });
 
     Route::middleware(['role:admin'])->group(function(){
