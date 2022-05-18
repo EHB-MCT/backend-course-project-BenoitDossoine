@@ -643,8 +643,20 @@ select {
 .right-0 {
   right: 0px;
 }
+.top-20 {
+  top: 5rem;
+}
+.right-20 {
+  right: 5rem;
+}
 .top-0 {
   top: 0px;
+}
+.top-10 {
+  top: 2.5rem;
+}
+.right-10 {
+  right: 2.5rem;
 }
 .z-0 {
   z-index: 0;
@@ -1533,11 +1545,11 @@ h2{
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
-.hover\:fill-green-500:hover {
-  fill: #22c55e;
-}
 .hover\:fill-red-500:hover {
   fill: #ef4444;
+}
+.hover\:fill-green-500:hover {
+  fill: #22c55e;
 }
 .hover\:stroke-green-700:hover {
   stroke: #15803d;
