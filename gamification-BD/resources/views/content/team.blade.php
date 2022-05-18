@@ -46,7 +46,7 @@
                             <p>{{$quest->experience}} XP</p>
                             @can('achieve quest')
                             @if($quest->achievements->where('user_id',auth()->user()->id)->first()->status == 'not completed')
-                                <button class="btn btn-white mt-6" onclick="
+                                <button class="btn btn-white mt-6 hover:text-red-800 hover:border-red-800 active:fill-red-800" onclick="
                                     event.preventDefault();
                                     document.getElementById('questBtn{{$quest->id}}').submit();">Mark as completed</button>
                                 <form method="POST" action="{{route('markStudentQuestPending')}}" id="questBtn{{$quest->id}}" class="hidden">
@@ -55,9 +55,9 @@
                                     @csrf
                                 </form>
                             @elseif($quest->achievements->where('user_id',auth()->user()->id)->first()->status == 'pending')
-                                <button class="btn btn-white mt-6 disabled">Pending</button>
+                                <button class="btn btn-white mt-6 disabled hover:text-orange-500 hover:border-orange-500">Pending</button>
                             @elseif($quest->achievements->where('user_id',auth()->user()->id)->first()->status == 'completed')
-                                <button class="btn btn-white completedBtn mt-6 disabled">Completed</button>
+                                <button class="btn btn-white completedBtn mt-6 disabled hover:text-green-500 hover:border-green-500">Completed</button>
                             @endif
                             @endcan
                         </div>
@@ -97,7 +97,7 @@
                         <p>{{$quest->experience}} XP</p>
                         @can('achieve quest')
                             @if($quest->achievements->where('user_id',auth()->user()->id)->first()->status == 'not completed')
-                                <button class="btn btn-white mt-6 hover:text-green-500 hover:border-green-500" onclick="
+                                <button class="btn btn-white mt-6 hover:text-red-800 hover:border-red-800 active:fill-red-800 active:text-white" onclick="
                                     event.preventDefault();
                                     document.getElementById('questBtn{{$quest->id}}').submit();">Mark as completed</button>
                                 <form method="POST" action="{{route('markStudentQuestPending')}}" id="questBtn{{$quest->id}}" class="hidden">
@@ -106,9 +106,9 @@
                                     @csrf
                                 </form>
                             @elseif($quest->achievements->where('user_id',auth()->user()->id)->first()->status == 'pending')
-                                <button class="btn btn-white mt-6 disabled">Pending</button>
+                                <button class="btn btn-white mt-6 disabled hover:text-orange-500 hover:border-orange-500">Pending</button>
                             @elseif($quest->achievements->where('user_id',auth()->user()->id)->first()->status == 'completed')
-                                <button class="btn btn-white completedBtn mt-6 disabled">Completed</button>
+                                <button class="btn btn-white completedBtn mt-6 disabled hover:text-green-500 hover:border-green-500">Completed</button>
                             @endif
                         @endcan
                     </div>

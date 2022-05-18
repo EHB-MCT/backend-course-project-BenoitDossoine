@@ -12,7 +12,7 @@
             <input type="textarea" name="description" id="description" class="h-52">
 
             @csrf
-            <input type="submit" class="w-1/4 mt-6 btn btn-green self-end">
+            <input type="submit" class="w-1/4 mt-6 btn btn-white self-end">
         </form>
 
     </div>
