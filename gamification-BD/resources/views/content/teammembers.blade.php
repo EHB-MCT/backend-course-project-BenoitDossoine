@@ -7,11 +7,11 @@
             <div class="currentMembersContainer  col-span-2">
                 <p class="text-3xl font-light mb-4">Members</p>
                 @foreach($team->users as $user)
+                    @if($user->hasRole('member'))
                     <div class="currentMemberContainer grid grid-cols-3">
                         <p>{{$user->name}}</p>
-                        <p>9/15 quests completed</p>
-                        <p>Joined 15/9/2022</p>
                     </div>
+                    @endif
                 @endforeach
             </div>
             <div class="newMembersContainer col-span-1">

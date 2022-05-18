@@ -3,7 +3,7 @@
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\QuestController;
 use App\Http\Controllers\AchievementController;
-use App\Models\Quest;
+use App\Models\Achievement;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Http\Request;
