@@ -67,7 +67,7 @@ Route::middleware(['auth'])->group(function(){
             $team = Team::find($teamId);
             $allUsers = User::role('member')->get();
             return view('content.teammembers',["team"=>$team, "allUsers"=>$allUsers]);
-        })->name('teammembers');
+        })->middleware('user_in_team:$teamId')->name('teammembers');
 
         //overview of member's quests to approve
         Route::get('/team/{team_id}/teamprogress',function($teamId){

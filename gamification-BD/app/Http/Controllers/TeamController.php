@@ -10,6 +10,14 @@ use Illuminate\Validation\Factory;
 
 class TeamController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('user_in_team:$teamId',[
+            'only'=>[
+                'teamData'
+            ]
+        ]);
+    }
     public function allTeams(){
         $currentUser = Auth::user();
         $teamList= $currentUser->teams;
