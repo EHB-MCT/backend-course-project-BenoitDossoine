@@ -12,7 +12,7 @@ class TeamController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('user_in_team:$teamId',[
+        $this->middleware('user_in_team',[
             'only'=>[
                 'teamData'
             ]

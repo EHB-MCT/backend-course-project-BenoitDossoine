@@ -57,7 +57,6 @@ Route::middleware(['auth'])->group(function(){
         Route::post('/teamcreate', [TeamController::class,"makeNewTeam"])->name('teamcreate');
 
 
-
         //handling of new quest data
         Route::post('/questcreate', [QuestController::class,"addTeamQuest"])->name('questcreate');
 
